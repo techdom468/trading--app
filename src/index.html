@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <h1>My Trading App</h1>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Transactions</a></li>
+        </ul>
+    </nav>
+    <header>
+        <input type="text" id="search-bar" placeholder="Search for stocks...">
+    </header>
+    <main>
+        <section class="dashboard">
+            <h2>Dashboard</h2>
+        </section>
+        <section class="portfolio">
+            <h2>My Portfolio</h2>
+            <form id="portfolio-form">
+                <input type="text" id="portfolio-stock" placeholder="Stock name">
+                <input type="number" id="portfolio-quantity" placeholder="Quantity">
+                <button type="submit">Add to Portfolio</button>
+            </form>
+            <div id="portfolio-list"></div>
+        </section>
+        <section class="transaction-history">
+            <h2>Transaction History</h2>
+            <div id="transaction-list"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 My Trading App</p>
+    </footer>
+    <script src="App.js"></script>
+</body>
+</html>
