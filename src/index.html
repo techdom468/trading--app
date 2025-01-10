@@ -43,3 +43,63 @@
     <script src="App.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <button onclick="saveData()">Save Data</button>
+    <button onclick="loadData()">Load Data</button>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let chartData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Stock Price',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        };
+
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function saveData() {
+            localStorage.setItem('chartData', JSON.stringify(chartData));
+            alert('Data saved!');
+        }
+
+        function loadData() {
+            const savedData = localStorage.getItem('chartData');
+            if (savedData) {
+                chartData = JSON.parse(savedData);
+                myChart.data = chartData;
+                myChart.update();
+                alert('Data loaded!');
+            } else {
+                alert('No data found!');
+            }
+        }
+    </script>
+</body>
+</html>
