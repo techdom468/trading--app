@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   searchBar.addEventListener('input', (event) => {
       const query = event.target.value.toLowerCase();
       const cards = document.querySelectorAll('.card');
+      const dashboard = document.querySelector('.dashboard');
       cards.forEach(card => {
           const stockName = card.querySelector('h3').textContent.toLowerCase();
           if (stockName.includes(query)) {
@@ -47,10 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  // Existing code...
-
-  // Update prices every 10 seconds
-
 
 
 
@@ -69,3 +66,38 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioForm.reset();
   });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBar = document.getElementById('search-bar');
+    setInterval(updatePrices, 10000);
+    searchBar.addEventListener('input', (event) => {
+        const query = event.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+        const dashboard = document.querySelector('.dashboard');
+        cards.forEach(card => {
+            const stockName = card.querySelector('h3').textContent.toLowerCase();
+            if (stockName.includes(query)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+  
+    // Fetch portfolio data
+    fetch('/api/portfolio')
+      .then(response => response.json())
+      .then(data => {
+        const portfolioList = document.getElementById('portfolio-list');
+        portfolioList.innerHTML = ''; // Clear existing content
+        data.forEach(stock => {
+          const listItem = document.createElement('div');
+          listItem.className = 'portfolio-item';
+          listItem.innerHTML = `
+            <h3>${stock.name}</h3>
+            <p>Quantity: ${stock.quantity}</p>
+          `;
+          portfolioList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching portfolio data:', error));
+  });

@@ -22,5 +22,10 @@ app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
 
-
-
+app.get('/api/portfolio', (req, res) => {
+    res.json([
+      { id: 1, name: 'RELIANCE', quantity: 10 },
+      { id: 2, name: 'ADANI', quantity: 5 },
+      { id: 3, name: 'WARREN.CO', quantity: 2 }
+    ]);
+  });
